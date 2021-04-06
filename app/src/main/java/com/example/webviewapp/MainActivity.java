@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -39,7 +40,10 @@ public class MainActivity extends AppCompatActivity {
         WebView myWebView = findViewById(R.id.my_webview); // 1* Variabeln myWebView skapad (instansierad) och den variabeln kallar på id my_WebView
 
         WebView minWebView = (WebView) findViewById(R.id.my_webview);
-        myWebView.loadUrl("https://www.his.se");
+        myWebView.loadUrl("file:///android_asset/about.html");
+
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
 
         /*
         * Rename your App. Tip: Values->Strings
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         * Create a new WebViewClient to attach to our WebView. This allows us to
           browse the web inside our app.
         -- Commit and push to your github fork
+
         * Enable Javascript execution in your WebViewClient
         * Enter the url to load in our WebView
         -- Commit and push to your github fork
