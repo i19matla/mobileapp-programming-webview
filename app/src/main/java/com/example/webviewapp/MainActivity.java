@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -14,8 +16,13 @@ import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Private members
+    private WebView myWebView;
+
     public void showExternalWebPage(){
         // TODO: Add your code for showing external web page here
+        WebView myWebView = (WebView) findViewById(R.id.my_webview);
+        myWebView.loadUrl("http://www.example.com");
     }
 
     public void showInternalWebPage(){
@@ -29,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        WebView myWebView = findViewById(R.id.my_webview); // 1* Variabeln myWebView skapad (instansierad) och den variabeln kallar på id my_WebView
+
+        WebView minWebView = (WebView) findViewById(R.id.my_webview);
+        myWebView.loadUrl("https://www.his.se");
+
         /*
         * Rename your App. Tip: Values->Strings
         * Enable Internet access for your App. Tip: Manifest
@@ -36,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         * Give the WebView element ID "my_webview"
         -- Commit and push to your github fork
         * Create a private member variable called "myWebView" of type WebView
-        * Locate the WebView element created in step 1 using the ID created in step 2
+        1*     Locate the WebView element created in step 1 using the ID created in step 2    Tänk som javascript get.element.byId... se 1* längre ned
         * Create a new WebViewClient to attach to our WebView. This allows us to
           browse the web inside our app.
         -- Commit and push to your github fork
@@ -54,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
            one (1) screenshot showing your external web page.
         */
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);  // 1* findViewById blir ungefär samma som get.element.byId...
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
