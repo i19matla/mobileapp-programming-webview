@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akademiska Hillbillyklubben</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Caveat', cursive;
+        }
+
+        .allabla {
+            background-color: rgb(164, 208, 214);
+            width: 95vw;
+            left: 2.5vw;
+            margin: 7px 0px 7px 0px;
+            box-shadow: 5px 5px 5px grey;
+            display: block;
+            border-radius: 3px;
+        }
+
+        #surfplatta {
+            display: none;
+        }
+
+        #dator {
+            display: none;
+        }
+
+        /*                                    ------------------------------ Under för att styra utgångsläget, grundbilden till SVG och spelknapparna i linjalen */
+        svg {
+            background-image: linear-gradient(to top right, lightyellow, skyblue);
+            box-shadow: 5px 5px 5px grey;
+            height: 150px;
+        }
+
+        #tillspelknappar>p {
+            position: relative;
+            top: -90px;
+            text-align: center;
+        }
+
+        #tillspelknappar>h3 {
+            text-align: center;
+            background: darkgreen;
+            margin-left: 0.5vw;
+            width: 95vw;
+            height: 63px;
+            padding-right: 2px;
+            color: white;
+        }
+
+        .spelknappar {
+            position: relative;
+            top: -82px;
+            display: flex;
+            margin-left: 0.5vw;
+            justify-content: space-evenly;
+            border: 2px solid black;
+            width: 95vw;
+            box-shadow: 4px 4px 4px grey;
+        }
+
+        .spelknappar>div {
+            width: calc(95vw / 22);
+            height: 60px;
+            color: white;
+        }
+
+        .rubrikmeny {
+            text-align: center;
+            border: 2px solid black;
+            box-shadow: 4px 4px 4px grey;
+        }
+
+        #rektangelsnurr {
+            transform: translateY(195px);
+        }
+
+        @keyframes molnglider1 {
+            0% {
+                transform: translateY(-100px)translateX(440px);
+            }
+
+            100% {
+                transform: translateY(-100px)translateX(-440px)scale(1.3);
+            }
+        }
+
+        #moln1 {
+            animation-name: molnglider1;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        #moln2 {
+            transform: translateY(-100px);
+            animation-name: molnglider2;
+            animation-duration: 7s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        @keyframes molnglider2 {
+            0% {
+                transform: translateY(-100px)translateX(440px);
+            }
+
+            50% {
+                transform: translateY(-100px)translateX(0px)scale(1.5);
+            }
+
+            100% {
+                transform: translateY(-100px)translateX(-440px);
+            }
+        }
+
+        #sunshine {
+            animation-name: solrotation;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        #sunbeam1 {
+            transform: translate(65px, 0px);
+        }
+
+        #sunbeam2 {
+            transform: translate(0px, 65px);
+        }
+
+        #sunbeam3 {
+            transform: translate(-65px, 0px);
+        }
+
+        #sunbeam4 {
+            transform: translate(0px, -65px);
+        }
+
+        #sunbeam5 {
+            transform: translate(40px, 40px);
+        }
+
+        #sunbeam6 {
+            transform: translate(-40px, 40px);
+        }
+
+        #sunbeam7 {
+            transform: translate(-40px, -40px);
+        }
+
+        #sunbeam8 {
+            transform: translate(40px, -40px);
+        }
+
+        @keyframes solrotation {
+            0% {
+                transform: translate(-300px, -100px)rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-300px, -100px)rotate(360deg);
+            }
+        }
+
+        /*                                    ------------------------------ Över för att styra utgångsläget, grundbilden till SVG och spelknapparna i linjalen*/
+        /*                                    ------------------------------ Här under är allt till dropdown menyn */
+        .visamenyn {
+            background-color: rgb(164, 208, 214);
+            border: 2px solid grey;
+            display: flex;
+            justify-content: space-around;
+            padding: 5px;
+            box-shadow: 5px 5px 5px grey;
+        }
+
+        .visaEJmenyn {
+            display: none;
+        }
+
+        #navbar>button {
+            margin: 2px;
+            box-shadow: 5px 5px 5px grey;
+        }
+
+        #menyNer>h3 {
+            border: 1px solid black;
+            margin: 3px;
+        }
+
+        #klicken {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid black;
+            padding: 0px;
+            background-color: darkgreen;
+            color: white;
+            box-shadow: 5px 5px 5px grey;
+        }
+
+        #klicken>h1 {
+            margin: 0px;
+        }
+
+        /*                                    ------------------------------ Här över är allt till dropdown menyn */
+        /*                                    ------------------------------ Här under är till "förstasidan" */
+        .firstpic {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /*                                ------------------------------ Här över är till förstasidan */
+        /*                                    ------------------------------ Här under är till frågesportsidan */
+        .fragesport,
+        figure,
+        .fraga>h3 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 5px 5px 5px grey;
+        }
+
+        .fraga {
+            width: 93vw;
+            height: 35vh;
+            border: 5px solid rgb(42, 122, 26);
+            background-color: darkgreen;
+            box-shadow: 5px 5px 5px grey;
+        }
+
+        .fraga>h3 {
+            background-color: burlywood;
+        }
+
+        .fraga>p {
+            color: white
+        }
+
+        /*                                    ------------------------------ Här under är till frågesportsidan */
+        /*                                    ------------------------------ Här under generell styling för EXAKT ALLA element*/
+        figure {
+            border: 2px solid black;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /*                                    ------------------------------ Här under generell styling för EXAKT ALLA element*/
+        /*                                    ------------------------------ Under för att styra att visa svar eller inte till frågedelen*/
+        @media screen and (orientation: portrait) {
+            .infotextfraga {
+                display: none;
+            }
+
+            .svar {
+                display: none;
+            }
+        }
+
+        /*                                    ------------------------------ Över för att styra att visa svar eller inte till frågedelen*/
+        @media screen and (orientation: landscape) {
+
+            .svar {
+                display: block;
+                background-color: burlywood;
+                width: 90vw;
+                height: 35vh;
+            }
+
+            .infotextsvar {
+                display: none;
+            }
+
+            #surfplatta {
+                display: none;
+            }
+
+            #dator {
+                display: none;
+            }
+
+            .fraga {
+                position: absolute;
+                top: 7px;
+                left: 15px;
+            }
+        }
+
+        /*                                    ------------------------------ Under kontrollera om det är mobil dator eller surfplatta */
+        /*Mellan vid 680 är texten borta och vid 681 kommer texten fram för min telefon*/
+        @media screen and (orientation: portrait) and (min-width: 600px) {
+            #surfplatta {
+                display: block;
+            }
+        }
+
+        @media screen and (min-width: 830px) {
+            #surfplatta {
+                display: block;
+            }
+
+            /*För surfplattor*/
+            #dator {
+                display: none;
+            }
+        }
+
+        @media screen and (min-width: 1275px) {
+            #bigbodyfuralles {
+                display: none;
+            }
+
+            #surfplatta {
+                display: none;
+            }
+
+            /*För datorskärmar*/
+            #dator {
+                display: block;
+                display: flex;
+                justify-content: center;
+                height: 100vh;
+                align-items: center;
+                background-color: darkgreen;
+                color: white;
+                font-size: 2em;
+                text-align: center;
+            }
+        }
+
+        /*-------------------------------------------------------------------------Här under ligger koden för Like / Disslike HAMMER ----------------------------------------------------*/
+        .instructiontext {
+            position: relative;
+            top: -400px;
+            text-align: center;
+            color: white;
+            background-color: rgba(200, 200, 0, 0.3);
+        }
+
+        #panpage1>div>img {
+            width: 100%;
+            height: auto;
+        }
+
+        #outer-container {
+            position: relative;
+            max-width: 400px;
+            display: block;
+            margin: auto;
+
+
+            /*margin-left: calc(50% - 200px);
+            top:0%;
+            left: 50%;
+            right: 50%;
+            bottom:0%;
+            overflow:hidden;    */
+        }
+
+        #container {
+            width: 100%;
+            height: 150px;
+        }
+
+        #panpage1 {
+            left: 0%;
+            display: block;
+        }
+
+        #dialog1 {
+            background-color: darkgreen;
+            color: white;
+        }
+
+        #dialog2 {
+            background: brown;
+            color: white;
+        }
+
+        .panpage {
+            position: relative;
+            top: 0px;
+            left: 0;
+            right: 0;
+            z-index: 3;
+            left: 0%;
+            top: 0%;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+
+        .dialog-container {
+            display: flex;
+            justify-content: flex-end;
+            flex-wrap: nowrap;
+            align-items: center;
+            position: relative;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            animation-name: hoppok;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        @keyframes hoppok {
+            0% {
+                transform: translateX(0px);
+            }
+
+            50% {
+                transform: translateX(-150px)scale(2);
+            }
+
+            100% {
+                transform: translateX(0px);
+            }
+        }
+
+        .dialog-container1 {
+            display: flex;
+            justify-content: flex-end;
+            flex-wrap: nowrap;
+            align-items: center;
+            position: relative;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            animation-name: hoppok1;
+            animation-duration: 1.5s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        @keyframes hoppok1 {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .menu-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+            align-items: center;
+            position: relative;
+            bottom: -150px;
+            color: white;
+            left: 0;
+            right: 0;
+        }
+
+        .button {
+            padding: 10px;
+            width: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid lightgreen;
+            background-color: darkgreen;
+            color: white;
+            border-radius: 5px;
+            margin: 5px;
+            white-space: nowrap;
+        }
+
+        .dialog {
+            width: 80vw;
+            height: 20vh;
+            box-shadow: 5px 5px 5px grey;
+            top: 20vh;
+            left: 10vw;
+            display: none;
+            position: absolute;
+        }
+
+        #opponer {
+            text-align: center;
+            font-size: 2em;
+            color: darkgreen;
+            text-shadow: 2px 2px 2px grey;
+        }
+
+        .tooltip {
+            /* hide and position tooltip */
+            position: fixed;
+            bottom: calc(50vh - 50px);
+            left: calc(50vw - 100px);
+            width: 200px;
+            height: 100px;
+            background-color: skyblue;
+            color: black;
+            border-radius: 25px 5px 25px 5px;
+            opacity: 0;
+            padding: 5px;
+            box-shadow: 5px 5px 5px black;
+            text-align: center;
+        }
+    </style>
+    <script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
+    <script src="https://raw.githack.com/HGustavs/Shaker.js/master/shaker.js"></script>
+    <script>
+        function visaEllerIckeVisaElement(event) {
+            var platsenattforandra = document.getElementById("menyNer");
+            if (platsenattforandra.className == "visamenyn") {
+                platsenattforandra.className = "visaEJmenyn";
+            }
+            else {
+                platsenattforandra.className = "visamenyn";
+            }
+        }
+
+        function initieraHammaren() {                                                //Den här körs initialt och sedan körs den sist igen för att dölja menyn när ett menyklick har skett.
+            var dubbelklickplatsen = document.getElementById("klicken");
+            var platsenattforandra = document.getElementById("menyNer");
+            platsenattforandra.className = "visaEJmenyn";
+            var helasmacket = new Hammer(dubbelklickplatsen);
+            helasmacket.on("tap", function (event) { visaEllerIckeVisaElement(event) });
+        }
+        /* ----- Javascript for SPA - Single Page Application logic ----- */
+        // Help function that shows page p and hides all other pages
+        function showPage(p) {
+            // Step 1 - Hide all pages
+            pageArr = document.getElementsByClassName("page");
+            for (let i = 0; i < pageArr.length; i++) {
+                let page = pageArr[i];
+                page.style.display = "none";
+            }
+            // Step 2 - Show the selected page
+            document.getElementById("page" + p).style.display = "block";
+
+            // Step 3 - Make buttons inactive
+            btnArr = document.getElementsByClassName("btn");
+            for (let i = 0; i < btnArr.length; i++) {
+                let btn = btnArr[i];
+                btn.classList.remove("active");
+            }
+            // Step 4 - Make page button active
+            let navBtn = document.getElementById("nav" + p);
+            if (navBtn) {
+                navBtn.classList.add("active");
+            }
+
+            visaEllerIckeVisaElement();     //Eftersom hela grejen finns högre upp färdigt behöver den funktionen bara köras en gång till för att inte visa menyn när jag har klickat.
+        }
+        /* -----  ----- */
+
+        // Init function. Here we can put code that is needed to initialize our prototype.
+        function initPrototype() {
+            // For example, when using sound or sensors this becomes important.
+            console.log("==> Prototype init started.");
+        }
+        function initShaker() {
+            shaker.on("tilt", function (edata) {
+
+                var angle = edata.alpha;
+                angleright = Math.round(angle);
+                angleleft = ~angleright;
+
+
+                if (angle <= 160) {
+                    document.getElementById("opponer").style.transform = 'translateY(' + angleright + 'px)';
+                }
+                else if (angle >= 201) {
+                    document.getElementById("opponer").style.transform = 'translateY(' + angleleft + 'px)';
+                }
+                else {
+                    document.getElementById("hittadmedlem").innerHTML = "Grattis du hittade Sven-Örjan även kallad Sörjan!";
+                }
+            });
+        }
+    </script>
+</head>
+
+<body onload="initieraHammaren(); showPage(0); fragesporten(); likedissHammer(); initShaker();">
+    <div id="page0" class="page">
+        <div
+            style='position:fixed;top:0;left:0;right:0;bottom:0;display:flex;justify-content:center;align-items:center;background-color: rgba(150,150,150,0.9);z-index: 2;'>
+            <button style='padding: 50px; border: 5px solid black;' class="btn" type="button"
+                onclick="initPrototype();showPage(1);">Under konstruktion: Du har just funnit Akademiska
+                Hillbillyklubbens webbprototyp för medlemskap</button>
+        </div>
+    </div>
+    <h3 id="dator">Prototypen är byggd för mindre enheter. <br /> <br /> Välkommen tillbaka genom en surfplatta eller
+        mobil.</h3>
+    <h3 id="surfplatta">Du besöker prototypen med en surfplatta, prototypen är i dagsläget optimerad för mobil storlek.
+    </h3>
+    <div id="bigbodyfuralles">
+        <div id="klicken">
+            <h1>Akademiska Hillbillyklubben</h1>
+            <img src="menyburgare1.png" height="50" alt="En menyburgare">
+        </div>
+        <div id="menyNer">
+            <nav id="navbar">
+                <button id="nav1" class="btn active" type="button" onclick="showPage(1);">Första sidan</button>
+                <button id="nav2" class="btn" type="button" onclick="showPage(2);">Frågesport</button>
+                <button id="nav3" class="btn" type="button" onclick="showPage(3);">Inträdesspelet</button>
+                <button id="nav4" class="btn" type="button" onclick="showPage(4);">Hitta medlemmen</button>
+                <button id="nav5" class="btn" type="button" onclick="showPage(5)">Licensinfo</button>
+            </nav>
+        </div>
+        <div id="page1" class="page">
+            <div>
+                <div class="allabla">
+                    <h4>Så du vill du bli medlem.</h4>
+                    <p>kriterier för medlemskap:</p>
+                    <ul>
+                        <li>Klarat inträdesproven "Smäll av en smell" och frågesporten Was? på denna sajt.</li>
+                        <li>Gilla att ha kul. Även på låtsas.</li>
+                        <li>Skratta åt dina egna skämt. Alltid.</li>
+                        <li>Innehar högskolepoäng alternativt känner till att högskolor existerar.</li>
+                    </ul>
+                </div>
+                <div class="firstpic">
+                    <figure>
+                        <img src="augustgrundaren.jpg" width="300"
+                            alt="August, grundaren av Akademiska Hillbillyklubben">
+                        <figcaption>Akademiska Hillbillyklubbens grundare: August S</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+
+        <div id="page2" class="page">
+            <div class="fragesport">
+                <div class="allabla">
+                    <h2>Frågesport: Was?</h2>
+                    <p class="infotextsvar">Se svaret: Vrid till landskapsläge. <br /><br />Nästa fråga: Skaka skaka
+                        skaka.
+                    </p>
+                </div>
+                <div class="fraga" id="fraga1">
+                    <h3>Första frågan</h3>
+                    <p>Vilka är ingredienserna i Akademiska Hillbillyklubbens öl?</p>
+                    <div class="svar">
+                        <h3>Svar första frågan:</h3>
+                        <p>De hemliga ingredienserna är vanligt bergsvatten och kryddan består av begagnat snus
+                            svordommar och svett.</p>
+                    </div>
+                </div>
+                <div class="fraga" id="fraga2">
+                    <h3>Andra frågan</h3>
+                    <p>Vem uppfann hjulet?</p>
+                    <div class="svar">
+                        <h3>Svar andra frågan:</h3>
+                        <p>Akademiska Hillbillyklubben</p>
+                    </div>
+                </div>
+                <div class="fraga" id="fraga3">
+                    <h3>Tredje frågan</h3>
+                    <p>Vad gör Akademiska Hillbillyklubbens medlemmar på helgerna?</p>
+                    <div class="svar">
+                        <h3>Svar tredje frågan:</h3>
+                        <p>Tuggar taggtråd lyssnar på opera och gör stavfel med flit.</p>
+                    </div>
+                </div>
+                <div class="fraga" id="fraga4">
+                    <h3>Fjärde frågan</h3>
+                    <p>För vilka är Akademiska Hillbillyklubben till för?</p>
+                    <div class="svar">
+                        <h3>Svar fjärde frågan:</h3>
+                        <p>Den fantastiska klubben är till för galna smartskallar med sinne för ett leende.</p>
+                    </div>
+                </div>
+                <p class="infotextfraga">Vrid tillbaka till porträttläge för att fortsätta frågesporten.</p>
+                <!--<p id="skakafraga">Tryck här och skaka telefonen för att se nästa fråga.</p> -->
+            </div>
+        </div>
+
+        <div id="page3" class="page">
+            <div id="helaspelet">
+                <div class="allabla">
+                    <p>Obs! Den här blå rutan med objektens koordinater kommer enbart finnas här under prototypens utvecklingsfas</p>
+                    <p id="knock">-</p>
+                    <p id="skrivut">-</p>
+                    <p id="skrivutmoln">-</p>
+                    <p id="skrivutmoln2">--</p>
+                </div>
+                <!--  här är för pan to like eller dislike ------------------------------------------------------------- -->
+                <div id="container">
+                    <div id="panpage1" class="panpage">
+                        <div>
+                            <svg width="95vw" viewBox="-400 -175 800 350" style="border: 3px solid grey">
+                                <defs>
+                                    <radialGradient id="circlesun" r="50%">
+                                        <stop offset="0%" style="stop-color:rgb(211, 190, 4);stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:rgb(250, 248, 136);stop-opacity:1" />
+                                    </radialGradient>
+                                </defs>
+                                <g id="sunshine">
+                                    <circle cx="0" cy="0" r="35" fill="url(#circlesun)" />
+                                    <line id="sunbeam1" x1="-20" y1="0" x2="20" y2="0" stroke="#FFFFAA" stroke-width="4"
+                                        stroke-linecap="round" />
+                                    <line id="sunbeam2" x1="0" y1="-20" x2="0" y2="20" stroke="#FFFF00" stroke-width="4"
+                                        stroke-linecap="round" />
+                                    <line id="sunbeam3" x1="20" y1="0" x2="-20" y2="0" stroke="#FFFFAA" stroke-width="4"
+                                        stroke-linecap="round" />
+                                    <line id="sunbeam4" x1="0" y1="20" x2="0" y2="-20" stroke="#FFFF00" stroke-width="4"
+                                        stroke-linecap="round" />
+                                    <line id="sunbeam5" x1="10" y1="10" x2="-10" y2="-10" stroke="#FFFFAA"
+                                        stroke-width="4" stroke-linecap="round" />
+                                    <line id="sunbeam6" x1="10" y1="-10" x2="-10" y2="10" stroke="#FFFF00"
+                                        stroke-width="4" stroke-linecap="round" />
+                                    <line id="sunbeam7" x1="10" y1="10" x2="-10" y2="-10" stroke="#FFFFAA"
+                                        stroke-width="4" stroke-linecap="round" />
+                                    <line id="sunbeam8" x1="10" y1="-10" x2="-10" y2="10" stroke="#FFFF00"
+                                        stroke-width="4" stroke-linecap="round" />
+                                </g>
+                                <g id="moln1">
+                                    <ellipse cx="0" cy="0" rx="50" ry="25" fill="#AABBCC" />
+                                    <ellipse cx="15" cy="-15" rx="35" ry="20" fill="#AAAAAA" stroke="black" />
+                                    <ellipse cx="35" cy="5" rx="45" ry="30" fill="#999999" />
+                                </g>
+                                <g id="moln2">
+                                    <ellipse cx="55" cy="5" rx="45" ry="30" fill="#AAAAAA" />
+                                    <ellipse cx="0" cy="0" rx="50" ry="25" fill="#DDDDDD" />
+                                    <ellipse cx="35" cy="-15" rx="35" ry="20" fill="#CCCCCC" stroke="black" />
+                                </g>
+                                <circle id="mittenorigo" cx="0" cy="0" r="5" stroke="black" stroke-width="1"
+                                    fill="aqua" />
+                                <rect id="rektangelsnurr" x="-10" y="-30" width="20" height="60" stroke="grey"
+                                    stroke-width="5" fill="url(#background)" />
+                            </svg>
+                        </div>
+                        <div class="menu-container">
+                            <div class="button" onclick="panend(-200);">Kul <br /> spel!</div>
+                            <div class="button" onclick="panend(200);">Trist <br /> spel</div>
+                        </div>
+                    </div>
+                    <div id="dialog2" class="dialog">
+                        <p>Det finns andra, tråkiga föreningar, sök upp en sån.</p>
+                        <div class="dialog-container1">
+                            <div class="button" onclick="pan(0);">Tryck här du!</div>
+                        </div>
+                    </div>
+                    <div id="dialog1" class="dialog">
+                        <p>Grattis du är ett steg närmare medlemskap!</p>
+                        <div class="dialog-container">
+                            <div class="button" onclick="pan(0);">Ok</div>
+                        </div>
+                    </div>
+                </div>
+                <!--  här är för pan to like eller dislike ------------------------------------------------------------- -->
+
+                <div id="tillspelknappar">
+                    <h3><br />Smäll av en smell</h3>
+                    <div class="spelknappar">
+                        <div id="knapp1">|</div>
+                        <div id="knapp2">|</div>
+                        <div id="knapp3">|</div>
+                        <div id="knapp4">|</div>
+                        <div id="knapp5">|</div>
+                        <div id="knapp6">|</div>
+                        <div id="knapp7">|</div>
+                        <div id="knapp8">|</div>
+                        <div id="knapp9">|</div>
+                        <div id="knapp10">|</div>
+                        <div id="knapp11">|</div>
+                        <div id="knapp12">|</div>
+                        <div id="knapp13">|</div>
+                        <div id="knapp14">|</div>
+                        <div id="knapp15">|</div>
+                        <div id="knapp16">|</div>
+                        <div id="knapp17">|</div>
+                        <div id="knapp18">|</div>
+                        <div id="knapp19">|</div>
+                        <div id="knapp20">|</div>
+                    </div>
+                    <p>Skjut av mojängen genom att trycka på linjalen. <br /> Svep åt vänster på spelet om du gillar´t.
+                        <br /> Svep åt höger på spelet om du dissart.</p>
+                </div>
+            </div>
+        </div>
+        <div id="page4" class="page">
+            <div class="allabla">
+                <h2>Hitta medlemmar!</h2>
+                <p>Snurra runt med din telefon för att hitta medlemmar!</p>
+                <div id="opponer">Oppåttá <br /> eller <br /> neråttá</div>
+                <div id="hittadmedlem">
+                </div>
+            </div>
+        </div>
+        <div id="page5" class="page">
+            <h2>Licensinformation:</h2>
+            <div class="allabla">
+                <h3>August Strindberg, förstasidan:</h3>
+                <a href="https://commons.wikimedia.org/wiki/File:Portrait_of_August_Strindberg_by_Richard_Bergh_1905.jpg"
+                    target="_blank">Richard
+                    Bergh, Public domain, via Wikimedia Commons</a>
+                <p>Public domain</p>
+            </div>
+            <div class="allabla">
+                <h2>Typsnitt</h2>
+                <a href="https://fonts.google.com/specimen/Lobster?preview.text_type=custom#standard-styles"
+                    target="_blank">Google font: Lobster</a>
+                <p>Licens:</p>
+                <a href="https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL" target="_blank">Open Font
+                    License.</a>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        // under är pan like disslike xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        function panend(deltaX) {
+            document.getElementById('panpage1').style.display = "none";
+            document.getElementById('dialog1').style.display = "none";
+            document.getElementById('dialog2').style.display = "none";
+
+            if (deltaX > 100) {
+                document.getElementById('dialog2').style.display = "block";
+            } else if (deltaX < -100) {
+                document.getElementById('dialog1').style.display = "block";
+            } else {
+                document.getElementById('panpage1').style.display = "block";
+                document.getElementById("panpage1").style.left = "0px";
+            }
+        }
+
+        function pan(deltaX) {
+            console.log(deltaX);
+            document.getElementById('panpage1').style.display = "block";
+            document.getElementById('dialog1').style.display = "none";
+            document.getElementById('dialog2').style.display = "none";
+            document.getElementById('panpage1').style.left = deltaX + "px";
+        }
+
+        function likedissHammer() {
+            // Get element and connect a Hammer.js object to it
+            var element = document.getElementById("container");
+            var hammertime = Hammer(element);
+
+            // Attach functions to each event
+            hammertime.on("panmove", function (event) { pan(event.deltaX); });
+            /*hammertime.on("panright", function(event) { pan(event.deltaX); });    
+            hammertime.on("panleft", function(event) { pan(event.deltaX); });   */
+            hammertime.on("panend", function (event) { panend(event.deltaX); })
+        }
+
+        // ovanför är pan like disslike xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        var differansenVanster;
+        var uppdateratlage;
+
+
+        var fragekort = 0;
+        var fragestartaren = "av";
+
+        document.getElementById("nav2").addEventListener("click", byttillstartvariabel); //När den här nås av ett klick så kallar den på funktionen nedan...          //dblclick är dubbelklick
+
+        function byttillstartvariabel() {                                                  //... och den här funktionen byter innehållet i variabeln...
+            fragestartaren = "start";
+            fragesporten();
+        }
+        document.getElementById("nav1").addEventListener("click", byttillstangavvariabel);
+        document.getElementById("nav3").addEventListener("click", byttillstangavvariabel);
+        //document.getElementById("skakafraga").addEventListener("click", byttillstartvariabel);
+        function byttillstangavvariabel() {                                                  //... och den här funktionen byter tillbaka innehållet i variabeln...
+            fragestartaren = "av";
+            fragekort = 0;
+        }
+
+        function fragesporten() {
+            if (fragestartaren == "start") {
+                console.log('testa skaken med: fragesporten();');
+                fragekort++;
+            }
+            if (fragekort == 1) {
+                document.getElementById("fraga1").style.display = 'block';
+                document.getElementById("fraga2").style.display = "none";
+                document.getElementById("fraga3").style.display = "none";
+                document.getElementById("fraga4").style.display = "none";
+            }
+            if (fragekort == 7) {
+                document.getElementById("fraga1").style.display = "none";
+                document.getElementById("fraga2").style.display = "block";
+                document.getElementById("fraga3").style.display = "none";
+                document.getElementById("fraga4").style.display = "none";
+            }
+            if (fragekort == 14) {
+                document.getElementById("fraga1").style.display = "none";
+                document.getElementById("fraga2").style.display = "none";
+                document.getElementById("fraga3").style.display = "block";
+                document.getElementById("fraga4").style.display = "none";
+            }
+            if (fragekort == 21) {
+                document.getElementById("fraga1").style.display = "none";
+                document.getElementById("fraga2").style.display = "none";
+                document.getElementById("fraga3").style.display = "none";
+                document.getElementById("fraga4").style.display = "block";
+            }
+            shaker.on("step", function (o) {
+
+                fragesporten();
+            });
+            //fragestartaren = "av";
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////
+        var butt1 = 'translateX(-380px)';
+        var butt2 = 'translateX(-340px)';
+        var butt3 = 'translateX(-300px)';
+        var butt4 = 'translateX(-260px)';
+        var butt5 = 'translateX(-220px)';
+        var butt6 = 'translateX(-180px)';
+        var butt7 = 'translateX(-140px)';
+        var butt8 = 'translateX(-100px)';
+        var butt9 = 'translateX(-60px)';
+        var butt10 = 'translateX(-20px)';
+        var butt11 = 'translateX(20px)';
+        var butt12 = 'translateX(60px)';
+        var butt13 = 'translateX(100px)';
+        var butt14 = 'translateX(140px)';
+        var butt15 = 'translateX(180px)';
+        var butt16 = 'translateX(220px)';
+        var butt17 = 'translateX(260px)';
+        var butt18 = 'translateX(300px)';
+        var butt19 = 'translateX(340px)';
+        var butt20 = 'translateX(380px)';
+
+        function kasta(flyttaXkoordinat) {
+            document.getElementById("rektangelsnurr").animate([
+                { transform: 'translateY(180px)' },
+                { transform: flyttaXkoordinat + 'translateY(170px)rotate(1080deg)' },
+                { transform: flyttaXkoordinat + 'translateY(-170px)' },
+                { transform: flyttaXkoordinat + 'translateY(170px)' },
+                { transform: 'translateY(180px)translateX(0px)rotate(720deg)' }
+            ], {
+                duration: 1500,
+                iterations: 1
+            });
+        }
+        var XrektangelsnurransPosition;
+
+        function rektangelplats() {
+            window.requestAnimationFrame(positionskontrollrektangelsnurra);
+            function positionskontrollrektangelsnurra() {
+                XrektangelsnurransPosition = rektangelsnurr.getBoundingClientRect().left;
+                XrektangelsnurransPosition = Math.round(XrektangelsnurransPosition);
+
+                document.getElementById("skrivut").innerHTML = " I X-led: " + XrektangelsnurransPosition;
+
+                window.requestAnimationFrame(positionskontrollrektangelsnurra);
+            }
+        }
+        var x1 = rektangelplats.x1;
+        function skickaut() {
+            document.getElementById("knock").innerHTML = x1;
+        }
+
+        skickaut();
+
+        function molnett() {
+            window.requestAnimationFrame(positionskontrollmoln1);
+            function positionskontrollmoln1() {
+                var Xmoln1Position = moln1.getBoundingClientRect().left;
+                Xmoln1Position = Math.round(Xmoln1Position);
+
+                document.getElementById("skrivutmoln").innerHTML = "I X-led är moln1: " + Xmoln1Position;
+                window.requestAnimationFrame(positionskontrollmoln1);
+            }
+        }
+
+        function molntva() {
+            window.requestAnimationFrame(positionskontrollmoln2);
+            function positionskontrollmoln2() {
+                var Xmoln2Position = moln2.getBoundingClientRect().left;
+                Xmoln2Position = Math.round(Xmoln2Position);
+
+                document.getElementById("skrivutmoln2").innerHTML = "I X-led är moln2: " + Xmoln2Position;
+                window.requestAnimationFrame(positionskontrollmoln2);
+            }
+        }
+
+        rektangelplats();
+        molnett();
+        molntva();
+
+        document.getElementById("knapp1").addEventListener("click", function () { kasta(butt1); });
+        document.getElementById("knapp2").addEventListener("click", function () { kasta(butt2); });
+        document.getElementById("knapp3").addEventListener("click", function () { kasta(butt3); });
+        document.getElementById("knapp4").addEventListener("click", function () { kasta(butt4); });
+        document.getElementById("knapp5").addEventListener("click", function () { kasta(butt5); });
+        document.getElementById("knapp6").addEventListener("click", function () { kasta(butt6); });
+        document.getElementById("knapp7").addEventListener("click", function () { kasta(butt7); });
+        document.getElementById("knapp8").addEventListener("click", function () { kasta(butt8); });
+        document.getElementById("knapp9").addEventListener("click", function () { kasta(butt9); });
+        document.getElementById("knapp10").addEventListener("click", function () { kasta(butt10); });
+        document.getElementById("knapp11").addEventListener("click", function () { kasta(butt11); });
+        document.getElementById("knapp12").addEventListener("click", function () { kasta(butt12); });
+        document.getElementById("knapp13").addEventListener("click", function () { kasta(butt13); });
+        document.getElementById("knapp14").addEventListener("click", function () { kasta(butt14); });
+        document.getElementById("knapp15").addEventListener("click", function () { kasta(butt15); });
+        document.getElementById("knapp16").addEventListener("click", function () { kasta(butt16); });
+        document.getElementById("knapp17").addEventListener("click", function () { kasta(butt17); });
+        document.getElementById("knapp18").addEventListener("click", function () { kasta(butt18); });
+        document.getElementById("knapp19").addEventListener("click", function () { kasta(butt19); });
+        document.getElementById("knapp20").addEventListener("click", function () { kasta(butt20); });
+    </script>
+</body>
+
+</html>

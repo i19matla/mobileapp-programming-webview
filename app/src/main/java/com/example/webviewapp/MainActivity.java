@@ -18,16 +18,19 @@ import androidx.appcompat.widget.Toolbar;
 public class MainActivity extends AppCompatActivity {
 
     // Private members
-    private WebView myWebView;
+   // private WebView myWebView;
 
     public void showExternalWebPage(){
         // TODO: Add your code for showing external web page here
         WebView myWebView = (WebView) findViewById(R.id.my_webview);
-        myWebView.loadUrl("http://www.example.com");
+        myWebView.loadUrl("https://www.his.se");
     }
 
     public void showInternalWebPage(){
         // TODO: Add your code for showing internal web page here
+        WebView minWebView = (WebView) findViewById(R.id.my_webview);
+        minWebView.loadUrl("file:///android_asset/index.html");
+        //myWebView.loadUrl("file:///android_asset/about.html");
     }
 
     @Override
@@ -39,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
         WebView myWebView = findViewById(R.id.my_webview); // 1* Variabeln myWebView skapad (instansierad) och den variabeln kallar på id my_WebView
 
-        WebView minWebView = (WebView) findViewById(R.id.my_webview);
-        myWebView.loadUrl("file:///android_asset/about.html");
+        WebView firstMeeting = (WebView) findViewById(R.id.my_webview);
+        firstMeeting.loadUrl("file:///android_asset/about.html");
 
         WebSettings webSettings = myWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -98,11 +101,13 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_external_web) {
             Log.d("==>","Will display external web page");
+            showExternalWebPage();
             return true;
         }
 
         if (id == R.id.action_internal_web) {
             Log.d("==>","Will display internal web page");
+            showInternalWebPage();
             return true;
         }
 
