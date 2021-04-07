@@ -17,17 +17,12 @@ import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Private members
-   // private WebView myWebView;
-
     public void showExternalWebPage(){
-        // TODO: Add your code for showing external web page here
         WebView myWebView = (WebView) findViewById(R.id.my_webview);
         myWebView.loadUrl("https://www.his.se");
     }
 
     public void showInternalWebPage(){
-        // TODO: Add your code for showing internal web page here
         WebView minWebView = (WebView) findViewById(R.id.my_webview);
         minWebView.loadUrl("file:///android_asset/index.html");
         //myWebView.loadUrl("file:///android_asset/about.html");
