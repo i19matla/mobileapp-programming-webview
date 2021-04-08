@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         WebView firstMeeting = (WebView) findViewById(R.id.my_webview);
         firstMeeting.loadUrl("file:///android_asset/about.html");
 
+        Log.d("==>","Användarens första möte med appen körs.");
+
         WebSettings webSettings = myWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
