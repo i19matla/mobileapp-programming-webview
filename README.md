@@ -79,9 +79,9 @@ public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
-Slutligen läggs koden för att kunna zippa filen till:
-```
+
 
 Bilder läggs i samma mapp som markdown-filen.
 
-![](android.png)
+![](Screenshot_1617797452.png)
+![](Screenshot_1617797838.png)
