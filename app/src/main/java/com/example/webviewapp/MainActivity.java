@@ -19,13 +19,11 @@ public class MainActivity extends AppCompatActivity {
     private WebView minWebView;
 
     public void showExternalWebPage(){
-
         minWebView.loadUrl("https://www.his.se");
     }
 
     public void showInternalWebPage(){
         minWebView.loadUrl("file:///android_asset/index.html");
-        //myWebView.loadUrl("file:///android_asset/about.html");
     }
 
     @Override
@@ -36,10 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         minWebView = findViewById(R.id.my_webview);
-        //WebView myWebView = findViewById(R.id.my_webview); // 1* Variabeln myWebView skapad (instansierad) och den variabeln kallar på id my_WebView
-
-        WebView firstMeeting = (WebView) findViewById(R.id.my_webview);
-        firstMeeting.loadUrl("file:///android_asset/about.html");
+        minWebView.loadUrl("file:///android_asset/about.html");
 
         Log.d("==>","Användarens första möte med appen körs.");
 
